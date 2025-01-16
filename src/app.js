@@ -1,19 +1,29 @@
-const express = require("express");
-
-// creating a new web server
 const app = express();
 
 
-app.use("/", (req, res) => {
+app.get("/", (req, res) => {
   res.send("Namaste from the dashboard!");
 });
 
-app.use("/hello", (req, res) => {
+// This will match all the HTTP method API calls to /test
+app.get("/user", (req, res) => {
+  res.send({ firstName: "Sravan", LastName: "Surya" });
+});
+
+app.get("/hello", (req, res) => {
   res.send("Hello hello hello!");
 });
 
+app.post("/user", (req, res) => {
+  // Saving data to DB
+  res.send("Data successfully saved to the database!");
+});
 
-app.use("/test", (req, res) => {
+app.delete("/user", (req, res) => {
+  res.send("Deleted successfully!");
+});
+
+app.get("/test", (req, res) => {
   res.send("Hello from the server!");
 });
 
