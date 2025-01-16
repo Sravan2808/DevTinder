@@ -4,17 +4,17 @@ const express = require("express");
 const app = express();
 
 
-app.get("/", (req, res) => {
+app.use("/", (req, res) => {
   res.send("Namaste from the dashboard!");
 });
 
 
-app.get("/hello", (req, res) => {
+app.use("/hello", (req, res) => {
   res.send("Hello hello hello!");
 });
 
 
-app.get("/test", (req, res) => {
+app.use("/test", (req, res) => {
   res.send("Hello from the server!");
 });
 
