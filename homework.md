@@ -18,8 +18,8 @@
 - Order of the routes matter a lot
 - Install Postman app and make a workspace/collection > test Api Call
 - Write logic to handle GET,POST,PATCH,DELETE API Cals and test them on Postman
-- Explore routing and use of ?,+,(),* in the routes
-- Use of regex in routes /a/ , /.*fly$/
+- Explore routing and use of ?,+,(),\* in the routes
+- Use of regex in routes /a/ , /.\*fly$/
 - Reading the query params in the routes
 - Reading the dynamic routes
 
@@ -42,3 +42,7 @@
 - Create POST /signup API to add data to database
 - Push some documents using API calls from postman
 - Error Handling using try,catch
+
+- JS object vs JSON (difference)
+- Add the express.json middleware to your app
+- Make your signup API dynamic to receive data from yhe end user
