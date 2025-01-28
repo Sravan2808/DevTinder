@@ -75,11 +75,28 @@ app.patch("/user", async (req, res) => {
       returnDocument: "before",
     });
     console.log(user);
-    res.send("User updated succe  ssfully");
+    res.send("User updated successfully");
   } catch (err) {
     res.status(404).send("Something went wrong: " + err.message);
   }
 });
+
+app.patch("/userByEmailID",async(req,res)=>{
+  const email = req.body.email
+  const name = req.body.name
+  console.log(email);
+  
+  console.log(name);
+  
+  try{
+    const user1 =  await User.findOneAndUpdate({emailId:email},{  firstName:name })
+    console.log(user1);
+    res.send("User updated successfully");
+  }
+  catch (err) {
+    res.status(404).send("Something went wrong: " + err.message);
+  }
+})
 
 connectDB()
   .then(() => {
