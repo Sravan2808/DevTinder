@@ -72,3 +72,5 @@
 - Validate data in Signup API
 - Install bcrypt package
 - Create PasswordHash using bcrypt.hash & save the user is excrupted password
+- Create Login Api
+- Compare password and through errors if email or password is invalid
