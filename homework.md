@@ -57,7 +57,6 @@
 - What are options in a Model.findOneAndUpdate method,explore more about it
 - API - UPdate the user with email ID
 
-
 - Explore Schematype options from the document
 - add required,unique,lowercase,min,minlength,trim
 - Add default
@@ -68,9 +67,15 @@
 - DATA Sanitizing - Add API validation for each field
 - NEVER TRUST req.body
 
-
 - Validate data in Signup API
 - Install bcrypt package
 - Create PasswordHash using bcrypt.hash & save the user is excrupted password
 - Create Login Api
 - Compare password and through errors if email or password is invalid
+
+- Install cookie-parse
+- just send a dummy cookie to user
+- create GET/profile API and check if you get the cookie back
+- install jsonwebtoken
+- In the login API,after email and passwork validation,create a JWT Token and send it to user
+- read the cookie inside your profile API and find the logged in user 
