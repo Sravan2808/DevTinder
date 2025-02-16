@@ -7,6 +7,7 @@ const bcrypt = require("bcrypt");
 const User = require("./models/user");
 const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
+const { userAuth } = require("./middlewares/auth");
 
 app.use(express.json());
 app.use(cookieParser());
@@ -48,7 +49,9 @@ app.post("/login", async (req, res) => {
 
     if (isPasswordValid) {
       // Create a JWT Token
-      const token = await jwt.sign({ _id: user._id }, "DEV@Tinder$790");
+      const token = await jwt.sign({ _id: user._id }, "DEV@Tinder$790", {
+        expiresIn: "0d",
+      });
       // Add the token to cookie and send the response back to the user
       res.cookie("token", token);
       res.send("Login Successfull!!!");
@@ -60,19 +63,10 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.get("/profile", async (req, res) => {
+app.get("/profile", userAuth, async (req, res) => {
   try {
-    const cookies = req.cookies;
-    const { token } = cookies;
-    if (!token) {
-      throw new Error("Invalid Token");
-    }
-
-    const decodedMessage = await jwt.verify(token, "DEV@Tinder$790");
-
-    const { _id } = decodedMessage;
-
-    const user = await User.findById(_id);
+    const user = req.user;
+    res.send(user);
     if (!user) {
       throw new Error("User does not exist");
     }
@@ -83,100 +77,10 @@ app.get("/profile", async (req, res) => {
   }
 });
 
-// Get user by email
-app.get("/user", async (req, res) => {
-  try {
-    const EmailId = req.body.emailId;
-    // console.log(EmailId);
-
-    const user = await User.find({ emailId: EmailId });
-    if (user.length === 0) {
-      res.status(404).send("User not found");
-    } else {
-      res.send(user);
-    }
-  } catch (err) {
-    res.status(404).send("Something went wrong");
-  }
-});
-
-// Feed Api - GET/feed - get all the users from the database
-app.get("/feed", async (req, res) => {
-  try {
-    const users = await User.find({});
-    res.send(users);
-  } catch (err) {
-    res.status(400).send("Something went wrong");
-  }
-});
-
-app.get("/id", async (req, res) => {
-  try {
-    const id = req.body._id;
-    const id1 = await User.findById({ _id: id });
-    res.send(id1);
-  } catch (err) {
-    res.status(404).send("something went wrong");
-  }
-});
-
-// Delete a user from the database
-app.delete("/user", async (req, res) => {
-  try {
-    const userId = req.body.userId;
-    const user = await User.findByIdAndDelete(userId);
-    res.send("User deleted Successfully");
-  } catch (err) {
-    res.status(404).send("something went wrong");
-  }
-});
-
-// Update data of the user
-app.patch("/user/:userId", async (req, res) => {
-  const userId = req.params?.userId;
-  const data = req.body;
-  console.log(userId);
-  console.log(data);
-
-  try {
-    const ALLOWED_UPDATES = ["photoUrl", "about", "gender", "age", "skills"];
-    const isUpdateAllowed = Object.keys(data).every((k) =>
-      ALLOWED_UPDATES.includes(k)
-    );
-    if (!isUpdateAllowed) {
-      throw new Error("Update not allowed");
-    }
-    if (data?.skills.length > 10) {
-      throw new Error("Skills cannot be more than 10 ");
-    }
-    const user = await User.findByIdAndUpdate(userId, data, {
-      returnDocument: "before",
-      runValidators: true,
-    });
-    console.log(user);
-    res.send("User updated successfully");
-  } catch (err) {
-    res.status(400).send("UPDATE FAILED: " + err.message);
-  }
-});
-
-app.patch("/userByEmailID", async (req, res) => {
-  const email = req.body.email;
-  const name = req.body.name;
-  console.log(email);
-
-  console.log(name);
-
-  try {
-    const user1 = await User.findOneAndUpdate(
-      { emailId: email },
-      { firstName: name }
-    );
-    console.log(user1);
-    res.send("User updated successfully");
-  } catch (err) {
-    res.status(404).send("Something went wrong: " + err.message);
-  }
+app.post("/sendConnectionRequest", userAuth, async (req, res) => {
+  const user = req.user;
+  console.log("Sending a connection request");
+  res.send(user.firstName + "Sent the connect request!");
 });
 
 connectDB()
