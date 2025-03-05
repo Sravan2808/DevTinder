@@ -108,3 +108,10 @@
 - What is the advantages and disadvantage of creating?
 - Read this article about compound index : https://www.mongodb.com/docs/manual/core/indexes/index-types/index-compound/
  - ALWAYS THINK ABOUT CORNER CASES 
+
+
+- Write code with proper validations for POST /request/review/:status/:requestId
+- Thought process - POST vs GET
+- Read about ref and populate https://mongoosejs.com/docs/populate.html
+- Create GET /user/requests/received with all the checks
+- Create GET GET /user/connections
