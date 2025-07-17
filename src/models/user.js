@@ -45,19 +45,22 @@ const userSchema = new mongoose.Schema(
         values: ["male", "female", "others"],
         message: `{VALUE} is not a valid gender type`,
       },
-      isPremium: {
-        type: Boolean,
-        default: false,
-      },
-      membershipType: {
-        type: String,
-      },
+
       // validate(value) {
       //   if (!["male", "female", "others"].includes(value)) {
       //     throw new Error("Gender data is not valid");
       //   }
       // },
     },
+    
+    isPremium: {
+      type: Boolean,
+      default: false,
+    },
+    membershipType: {
+      type: String,
+    },
+
     photoUrl: {
       type: String,
       default: "https://geographyandyou.com/images/user-profile.png",
