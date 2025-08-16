@@ -11,6 +11,7 @@ const userRouter = require("./routes/user");
 const cors = require("cors");
 const paymentRouter = require("./routes/payment");
 const initializeSocket = require("./utils/socket");
+const { createServer } = require("http");
 require('dotenv').config()
 
 require("./utils/cronjob");
@@ -31,7 +32,7 @@ app.use("/", requestRouter);
 app.use("/", userRouter);
 app.use("/",paymentRouter);
 
-const httpServer = createServer(app);
+const httpServer = http.createServer(app);
 initializeSocket(httpServer);
 
 connectDB()
