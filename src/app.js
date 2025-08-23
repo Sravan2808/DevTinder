@@ -12,6 +12,7 @@ const cors = require("cors");
 const paymentRouter = require("./routes/payment");
 const initializeSocket = require("./utils/socket");
 const { createServer } = require("http");
+const chatRouter = require("./routes/chat");
 require('dotenv').config()
 
 require("./utils/cronjob");
@@ -30,7 +31,8 @@ app.use("/", authRouter);
 app.use("/", profileRouter);
 app.use("/", requestRouter);
 app.use("/", userRouter);
-app.use("/",paymentRouter);
+app.use("/", paymentRouter);
+app.use("/", chatRouter);
 
 const httpServer = http.createServer(app);
 initializeSocket(httpServer);
