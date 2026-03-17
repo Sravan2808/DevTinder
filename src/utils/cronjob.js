@@ -21,7 +21,7 @@ cron.schedule("0 8 * * * ", async () => {
       ...new Set(pendingRequests.map((req) => req.toUserId.emailId)),
     ];
 
-    console.log(listOfEmails);
+    // console.log(listOfEmails);
     
     for (const email of listOfEmails) {
       try {
@@ -29,7 +29,7 @@ cron.schedule("0 8 * * * ", async () => {
           "New friend Requests pending for " + email,
           "There are so many friend requests pending, please login to devMatchh.me and accept or reject the request"
         );
-        console.log(res);
+        // console.log(res);
         
       } catch (err) {
         console.log(err);

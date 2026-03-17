@@ -20,7 +20,7 @@ const initializeSocket = (httpServer) => {
   io.on("connection", (socket) => {
     socket.on("joinChat", ({ firstName, userId, targetUserId }) => {
       const roomId = getSecretRoomId(userId, targetUserId);
-      console.log(firstName + " joined the chat" + roomId);
+      // console.log(firstName + " joined the chat" + roomId);
 
       socket.join(roomId);
     });
@@ -30,7 +30,7 @@ const initializeSocket = (httpServer) => {
       async ({ firstName, lastName, userId, targetUserId, text }) => {
         try {
           const roomId = getSecretRoomId(userId, targetUserId);
-          console.log(firstName + " sent a message to " + roomId + ": " + text);
+          // console.log(firstName + " sent a message to " + roomId + ": " + text);
 
           // check if userId and targetUserId are friends
           const isFriend = await ConnectionRequest.findOne({

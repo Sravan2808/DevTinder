@@ -27,7 +27,7 @@ app.use(
 app.use(express.json());
 app.use(cookieParser());
 
-app.use(express.static("./public/dist"));
+app.use(express.static("./public"));
 
 app.use("/", authRouter);
 app.use("/", profileRouter);
