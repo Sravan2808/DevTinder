@@ -13,7 +13,7 @@ const getSecretRoomId = (userId, targetUserId) => {
 const initializeSocket = (httpServer) => {
   const io = Server(httpServer, {
     cors: {
-      origin: "http://localhost:5173",
+      origin: ["http://localhost:5173", "https://devtinder-ebgf.onrender.com"],
       credentials: true,
     },
   });
@@ -74,7 +74,7 @@ const initializeSocket = (httpServer) => {
         } catch (error) {
           console.error("Error sending message:", error);
         }
-      }
+      },
     );
 
     socket.on("disconnect", () => {});

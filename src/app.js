@@ -21,7 +21,10 @@ require("./utils/cronjob");
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: [
+      "http://localhost:5173",
+      "https://devtinder-ebgf.onrender.com",
+    ],
     credentials: true,
   })
 );
