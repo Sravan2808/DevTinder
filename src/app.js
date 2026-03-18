@@ -30,9 +30,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use(express.static("./public"));
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve("public/index.html"));
-});
+
 
 app.use("/", authRouter);
 app.use("/", profileRouter);
@@ -40,6 +38,10 @@ app.use("/", requestRouter);
 app.use("/", userRouter);
 app.use("/", paymentRouter);
 app.use("/", chatRouter);
+
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve("public/index.html"));
+});
 
 const httpServer = http.createServer(app);
 initializeSocket(httpServer);
